@@ -33,9 +33,9 @@ st.title("NParks Research Summary App")
 st.write("Your role:", st.session_state["auth"])
 
 form = st.form(key="form")
-form.subheader("Enter your query on your research topic of interest")
+form.subheader("Search NParks publication database for your research topic of interest")
 
-#user_prompt = form.text_area("Enter your prompt here", height=200)
+user_prompt = form.text_area("Enter your query here", height=200)
 
 if form.form_submit_button("Submit"):
     
