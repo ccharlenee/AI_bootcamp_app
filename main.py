@@ -2,7 +2,7 @@
 import streamlit as st
 import pandas as pd
 # from helper_functions import llm
-from utility import check_password
+from helper_functions.sutility import check_password
 from logics.customer_query_handler import process_user_message
 
 
