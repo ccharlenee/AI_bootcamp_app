@@ -22,6 +22,7 @@ category_n_course_name = {'Programming and Development': ['Web Development Bootc
 
 # Load the JSON file
 filepath = './data/courses-full.json'
+
 with open(filepath, 'r') as file:
     json_string = file.read()
     dict_of_courses = json.loads(json_string)

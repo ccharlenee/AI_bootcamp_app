@@ -2,17 +2,20 @@
 import streamlit as st
 import pandas as pd
 # from helper_functions import llm
+from utility import check_password
 from logics.customer_query_handler import process_user_message
 
 
 # region <--------- Streamlit App Configuration --------->
 st.set_page_config(
     layout="centered",
-    page_title="My Streamlit App"
+    page_title="Research Papers App"
 )
 # endregion <--------- Streamlit App Configuration --------->
+if not check_password():  
+    st.stop()
 
-st.title("Streamlit App")
+st.title("NParks Research Summary App")
 
 form = st.form(key="form")
 form.subheader("Prompt")
@@ -26,6 +29,7 @@ if form.form_submit_button("Submit"):
     st.divider()
 
     response, course_details = process_user_message(user_prompt)
+    
     st.write(response)
 
     st.divider()
