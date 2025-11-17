@@ -15,10 +15,6 @@ st.set_page_config(
     layout="centered",
     page_title="Research Papers App"
 )
-# endregion <--------- Streamlit App Configuration --------->
-if not check_password():  
-    st.stop()
-
 st.sidebar.title("Role")
 
 if "auth" not in st.session_state:

@@ -1,5 +1,8 @@
 import streamlit as st
 from helper_functions.utility import require_login
+from helper_functions.style import apply_custom_styles
+
+apply_custom_styles()
 
 require_login()
 
