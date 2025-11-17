@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import json
+from helper_functions.style import apply_custom_styles
+
+apply_custom_styles()
 
 
 # Load the JSON file

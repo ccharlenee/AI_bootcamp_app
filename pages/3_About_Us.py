@@ -1,4 +1,7 @@
 import streamlit as st
+from helper_functions.style import apply_custom_styles
+
+apply_custom_styles()
 
 # region <--------- Streamlit App Configuration --------->
 st.set_page_config(
