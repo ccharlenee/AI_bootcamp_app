@@ -20,7 +20,7 @@ bucket = client.bucket(bucket_name)
 
 
 # File uploader
-uploaded_files = st.file_uploader(
+uploaded_file = st.file_uploader(
     "Choose files to upload",
     type=["pdf", "docx", "txt"],
     accept_multiple_files=True
