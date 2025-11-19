@@ -23,7 +23,7 @@ bucket = client.bucket(bucket_name)
 uploaded_file = st.file_uploader(
     "Choose files to upload",
     type=["pdf", "docx", "txt"],
-    accept_multiple_files=True
+    accept_multiple_files=False
 )
 
 if uploaded_file:
