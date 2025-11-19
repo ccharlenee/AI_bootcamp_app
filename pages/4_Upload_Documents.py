@@ -1,5 +1,7 @@
 import streamlit as st
 from helper_functions.style import apply_custom_styles
+from google.cloud import storage
+import json
 
 apply_custom_styles()
 
@@ -10,6 +12,13 @@ if st.session_state["auth"] != "admin":
 st.title("👑 Admin Dashboard")
 st.write("Only admins can see this.")
 
+service_account_info = st.secrets["gcp_service_account"]
+
+client = storage.Client.from_service_account_info(service_account_info)
+bucket_name = "research_app"# <-- change to your bucket name
+bucket = client.bucket(bucket_name)
+
+
 # File uploader
 uploaded_files = st.file_uploader(
     "Choose files to upload",
@@ -17,18 +26,11 @@ uploaded_files = st.file_uploader(
     accept_multiple_files=True
 )
 
-# Folder to save uploaded files
-upload_folder = "uploaded_docs"
-os.makedirs(upload_folder, exist_ok=True)
+if uploaded_file:
+    # Create a blob name (filename)
+    blob = bucket.blob(uploaded_file.name)
 
-if uploaded_files:
-    for file in uploaded_files:
-        file_path = os.path.join(upload_folder, file.name)
-        with open(file_path, "wb") as f:
-            f.write(file.getbuffer())
-        st.success(f"✅ Uploaded {file.name}")
+    # Upload file to GCS
+    blob.upload_from_string(uploaded_file.getvalue())
 
-# Optional: show list of uploaded files
-st.write("### Uploaded Files")
-for f in os.listdir(upload_folder):
-    st.write(f"- {f}")
+    st.success(f"Uploaded successfully to: gs://{bucket_name}/{uploaded_file.name}")
