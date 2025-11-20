@@ -4,21 +4,28 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import tiktoken
 
-
-if load_dotenv('.env'):
-   # for local development
-   OPENAI_KEY = os.getenv('OPENAI_API_KEY')
-else:
-   OPENAI_KEY = st.secrets["OPENAI_API_KEY"]
+# for local development
+load_dotenv('API_key.env')
+# try env variable first
+OPENAI_KEY = os.getenv('OPENAI_API_KEY')
+#fallback to streamlit secrets
+if not OPENAI_KEY:
+    try:
+        OPENAI_KEY = st.secrets["OPENAI_API_KEY"]
+    except Exception:
+        raise ValueError(
+            "OPEN_API_KEY not found."
+            "Please set it in .env for local or in secrets.toml for Streamlit."
+        )
 
 
 # Pass the API Key to the OpenAI Client
 client = OpenAI(api_key=OPENAI_KEY)
 
 
-def get_embedding(input, model='text-embedding-3-small'):
+def get_embedding(input_text, model='text-embedding-3-small'):
     response = client.embeddings.create(
-        input=input,
+        input=input_text,
         model=model
     )
     return [x.embedding for x in response.data]
@@ -26,12 +33,9 @@ def get_embedding(input, model='text-embedding-3-small'):
 
 # This is the "Updated" helper function for calling LLM
 def get_completion(prompt, model="gpt-4o-mini", temperature=0, top_p=1.0, max_tokens=1024, n=1, json_output=False):
-    if json_output == True:
-      output_json_structure = {"type": "json_object"}
-    else:
-      output_json_structure = None
-
     messages = [{"role": "user", "content": prompt}]
+    output_json_structure = {"type": "json_object"} if json_output else None
+    
     response = client.chat.completions.create( #originally was openai.chat.completions
         model=model,
         messages=messages,
@@ -52,7 +56,7 @@ def get_completion_by_messages(messages, model="gpt-4o-mini", temperature=0, top
         temperature=temperature,
         top_p=top_p,
         max_tokens=max_tokens,
-        n=1
+        n=n
     )
     return response.choices[0].message.content
 
@@ -66,5 +70,5 @@ def count_tokens(text):
 
 def count_tokens_from_message(messages):
     encoding = tiktoken.encoding_for_model('gpt-4o-mini')
-    value = ' '.join([x.get('content') for x in messages])
-    return len(encoding.encode(value))
+    combined_text = ' '.join([x.get('content') for x in messages])
+    return len(encoding.encode(combined_text))
