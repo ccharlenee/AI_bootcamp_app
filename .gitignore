@@ -22,3 +22,13 @@
 
         # Streamlit
         .streamlit/secrets.toml
+
+        #API keys
+        API_key.env
+
+        #database
+        db/
+
+        #virtul env
+        venv/
+        venv1/
