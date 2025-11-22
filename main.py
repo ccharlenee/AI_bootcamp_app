@@ -58,13 +58,13 @@ items = collection.get(include=["metadatas"])
 # Extract unique PDF names
 pdfs = sorted(set([m.get("source") for m in items["metadatas"]]))
 
-print("\nPDFs stored in the Chroma DB:")
-print("----------------------------------")
+st.write("\nPDFs stored in the Chroma DB:")
+st.write("----------------------------------")
 for p in pdfs:
     print(p)
 
-print("\nTotal PDFs detected:", len(pdfs))
-print("Total chunks stored:", collection.count())
+st.write("\nTotal PDFs detected:", len(pdfs))
+st.write("Total chunks stored:", collection.count())
 
 with st.form(key="form"):
     st.subheader("Enter your query here")
