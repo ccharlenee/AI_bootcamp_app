@@ -3,7 +3,7 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 import subprocess
 
 repo_url = "https://github.com/ccharlenee/AI_bootcamp_app.git"
-clone_dir = "./repo_clone"
+clone_dir = os.path.join(os.getcwd(), "repo_clone")
 
 if not os.path.exists(clone_dir):
     subprocess.run(["git", "clone", repo_url, clone_dir])
