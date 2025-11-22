@@ -17,7 +17,7 @@ elif st.session_state["auth"] == "user":
     st.sidebar.success("🙋 User Access")
 
 #start write up here
-st.title("About Us")
+st.title("Methodology")
 
 st.write("Methodology is as follows : xxxx")
 st.write("xxxxx")
