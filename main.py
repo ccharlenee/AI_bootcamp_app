@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from logics.retriever import load_retriever
+from logics.retriever import clone_repo
 from logics.prompt import create_single_pdf_chain
 from logics.config import DB_DIR 
 from collections import defaultdict
@@ -35,6 +36,9 @@ st.set_page_config(
 )
 
 st.title("Policy Summary")
+
+#clone repo and load vector store
+clone_repo()
 
 with st.form(key="form"):
     st.subheader("Enter your query here")

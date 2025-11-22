@@ -22,5 +22,5 @@ elif st.session_state["auth"] == "user":
 st.title("Methodology")
 
 st.write("Methodology is as follows : xxxx")
-st.write("xxxxx")
+st.write("Data sources: Journal articles are loaded ")
 st.write("xxx")
