@@ -1,5 +1,7 @@
 import streamlit as st
 from helper_functions.style import apply_custom_styles
+from helper_functions.utility import check_password
+from helper_functions.utility import login
 
 apply_custom_styles()
 
@@ -21,7 +23,7 @@ if st.session_state["auth"] == "admin":
 # If normal user
 elif st.session_state["auth"] == "user":
     st.sidebar.success("🙋 User Access")
-    
+
 st.title("About Us")
 
 st.write("This is an app that facilitates users' search of NParks publication database to summarise previous research publications by NParks")
