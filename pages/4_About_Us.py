@@ -27,7 +27,8 @@ elif st.session_state["auth"] == "user":
 st.title("About Us")
 
 st.write("This is an app that facilitates users' search of NParks publication database to summarise previous research publications by NParks")
-st.write("It is built using Streamlit and Langchain with GPT-4o-mini as the LLM")
+st.write("It is built using Streamlit and Langchain with GPT-4o-mini as the LLM, with research publications by NParks staff as data source")
+st.write("It has a feature for admins to upload new research publications to a database")
 st.write("Developed by Charlene Ng and Cheong Limin as part of the AI Bootcamp Project")
 
 with st.expander("How to use this App"):
