@@ -9,6 +9,7 @@ from collections import defaultdict
 from helper_functions.utility import check_password
 from helper_functions.utility import login
 
+st.sidebar.title("Role")
 
 if "auth" not in st.session_state:
     login()
@@ -22,7 +23,6 @@ if st.session_state["auth"] == "admin":
 elif st.session_state["auth"] == "user":
     st.sidebar.success("🙋 User Access")
 
-st.sidebar.title("Role")
 
 # Clear caches (optional)
 st.cache_resource.clear()
