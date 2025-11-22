@@ -39,7 +39,8 @@ st.title("Policy Summary")
 
 #clone repo and load vector store
 clone_repo()
-
+print("DB exists:", os.path.exists(DB_DIR))
+print("DB contents:", os.listdir(DB_DIR) if os.path.exists(DB_DIR) else "not found")
 with st.form(key="form"):
     st.subheader("Enter your query here")
     user_prompt = st.text_area("Enter your prompt here", height=200)
