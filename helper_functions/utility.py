@@ -36,10 +36,10 @@ def login():
 
     if st.button("Login"):
         # Load secrets
-        admin_user = st.secrets["credentials"]["admin_user"]
-        admin_pass = st.secrets["credentials"]["admin_password"]
-        user_user = st.secrets["credentials"]["user_user"]
-        user_pass = st.secrets["credentials"]["user_password"]
+        admin_user = st.secrets["admin_user"]
+        admin_pass = st.secrets["admin_password"]
+        user_user = st.secrets["user_user"]
+        user_pass = st.secrets["user_password"]
 
         # Check admin login
         if username == admin_user and password == admin_pass:
