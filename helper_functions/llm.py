@@ -4,21 +4,8 @@ from dotenv import load_dotenv
 from openai import OpenAI
 import tiktoken
 
-# for local development
-load_dotenv('API_key.env')
-# try env variable first
-OPENAI_KEY = os.getenv('OPENAI_API_KEY')
-#fallback to streamlit secrets
-if not OPENAI_KEY:
-    try:
-        OPENAI_KEY = st.secrets["OPENAI_API_KEY"]
-    except Exception:
-        raise ValueError(
-            "OPEN_API_KEY not found."
-            "Please set it in .env for local or in secrets.toml for Streamlit."
-        )
-
-
+OPENAI_KEY = st.secrets["OPENAI_API_KEY"]
+   
 # Pass the API Key to the OpenAI Client
 client = OpenAI(api_key=OPENAI_KEY)
 
