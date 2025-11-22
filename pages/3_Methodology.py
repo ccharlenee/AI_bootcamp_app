@@ -1,7 +1,9 @@
+import streamlit as st
 from helper_functions.style import apply_custom_styles
 
 apply_custom_styles()
 
+#LOGIN FUNCTION
 if "auth" not in st.session_state:
     login()
     st.stop()
@@ -13,3 +15,10 @@ if st.session_state["auth"] == "admin":
 # If normal user
 elif st.session_state["auth"] == "user":
     st.sidebar.success("🙋 User Access")
+
+#start write up here
+st.title("About Us")
+
+st.write("Methodology is as follows : xxxx")
+st.write("xxxxx")
+st.write("xxx")
