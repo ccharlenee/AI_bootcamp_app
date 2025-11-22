@@ -36,13 +36,33 @@ st.set_page_config(
 
 st.title("Policy Summary")
 
-#clone repo and load vector store
 
 if os.path.exists(DB_DIR):
     st.write(f"✅ DB directory exists: {DB_DIR}")
     st.write("Contents:", os.listdir(DB_DIR))
 else:
     st.write(f"❌ DB directory NOT found: {DB_DIR}")
+
+# Load Chroma DB
+vectordb = Chroma(
+    persist_directory="DB_Dir",
+    embedding_function=OpenAIEmbeddings()
+)
+
+# Access stored metadata
+collection = vectordb._collection
+items = collection.get(include=["metadatas"])
+
+# Extract unique PDF names
+pdfs = sorted(set([m.get("source") for m in items["metadatas"]]))
+
+print("\nPDFs stored in the Chroma DB:")
+print("----------------------------------")
+for p in pdfs:
+    print(p)
+
+print("\nTotal PDFs detected:", len(pdfs))
+print("Total chunks stored:", collection.count())
 
 with st.form(key="form"):
     st.subheader("Enter your query here")
