@@ -4,6 +4,8 @@ from logics.retriever import load_retriever
 from logics.prompt import create_single_pdf_chain
 from logics.config import DB_DIR 
 from collections import defaultdict
+from langchain_community.vectorstores import Chroma
+from langchain_openai import OpenAIEmbeddings
 
 # LOGIN FUNCTION
 from helper_functions.utility import check_password
