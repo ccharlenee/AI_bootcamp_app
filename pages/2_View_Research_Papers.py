@@ -26,7 +26,7 @@ service_account_info = st.secrets["gcp_service_account"]
 client = storage.Client.from_service_account_info(service_account_info)
 
 # Replace with your bucket name
-bucket_name = "your-bucket-name"
+bucket_name = "research_app"
 bucket = client.bucket(bucket_name)
 
 # Get all blobs (files) in the bucket
