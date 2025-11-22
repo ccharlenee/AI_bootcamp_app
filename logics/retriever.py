@@ -2,11 +2,11 @@ import os
 import subprocess
 from langchain_community.vectorstores import Chroma
 from langchain_core.runnables import RunnableLambda
-from logics.config import DB_DIR, get_embeddings
+from logics.config import DB_DIR, repo_url, clone_dir, get_embeddings
 
 def clone_repo():
     if not os.path.exists(CLONE_DIR):
-        subprocess.run(["git", "clone", REPO_URL, CLONE_DIR])
+        subprocess.run(["git", "clone", repo_url, clone_dir])
 
 def load_retriever(k=8):
     """
