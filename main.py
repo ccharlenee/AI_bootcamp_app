@@ -38,6 +38,17 @@ st.set_page_config(
 
 st.title("Policy Summary")
 
+import shutil
+import os
+
+REPO_DIR = os.path.join(os.getcwd(), "repo_clone") # Path to the cloned repository
+
+# Check if the repo folder exists and delete it
+if os.path.exists(REPO_DIR):
+    shutil.rmtree(REPO_DIR)
+    print(f"Deleted the existing cloned repo at {REPO_DIR}")
+else:
+    print(f"No existing repository found at {REPO_DIR}")
 
 if os.path.exists(DB_DIR):
     st.write(f"✅ DB directory exists: {DB_DIR}")
