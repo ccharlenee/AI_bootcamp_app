@@ -6,9 +6,6 @@ from google.cloud import storage
 
 apply_custom_styles()
 
-
-
-
 # Load service account from Streamlit secrets
 service_account_info = st.secrets["gcp_service_account"]
 
