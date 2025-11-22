@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 from logics.retriever import load_retriever
-from logics.retriever import clone_repo
 from logics.prompt import create_single_pdf_chain
 from logics.config import DB_DIR 
 from collections import defaultdict
@@ -44,7 +43,7 @@ if os.path.exists(DB_DIR):
     st.write("Contents:", os.listdir(DB_DIR))
 else:
     st.write(f"❌ DB directory NOT found: {DB_DIR}")
-    
+
 with st.form(key="form"):
     st.subheader("Enter your query here")
     user_prompt = st.text_area("Enter your prompt here", height=200)
