@@ -37,7 +37,7 @@ st.set_page_config(
 st.title("Policy Summary")
 
 #clone repo and load vector store
-clone_repo()
+
 if os.path.exists(DB_DIR):
     st.write(f"✅ DB directory exists: {DB_DIR}")
     st.write("Contents:", os.listdir(DB_DIR))
