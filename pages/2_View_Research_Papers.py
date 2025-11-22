@@ -35,5 +35,5 @@ blobs = list(bucket.list_blobs())
 # Extract file names
 file_list = [blob.name for blob in blobs]
 
-st.write("Found research documents:")
-st.write(file_list)
+df = pd.DataFrame(file_list, columns=["File Name"])
+st.table(df)
