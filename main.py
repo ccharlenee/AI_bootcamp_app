@@ -90,7 +90,7 @@ if submit_button:
         st.warning("Please enter a query before submitting.")
         st.stop()
 
-    if not os.path.exists(client):
+    if not client:
         st.error("No papers found. Please ingest papers first.")
         st.stop()
 
