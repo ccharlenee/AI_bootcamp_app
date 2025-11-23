@@ -40,6 +40,9 @@ def ingest_pdfs_from_gcs():
     
     loader = PyPDFLoader(temp_file_path)
     docs = loader.load()
+    # Attach the correct PDF name to each document's metadata
+    for doc in docs:
+        doc.metadata['source'] = pdf_file  # Store the PDF filename in the document's metadata
     all_docs.extend(docs)
 
     #remove temp file
