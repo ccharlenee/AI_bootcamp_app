@@ -95,7 +95,7 @@ if submit_button:
         st.stop()
     try:
         # Ensure that a collection is loaded (or check if the client is open)
-        if not client.get_collection() or not client.is_open():
+        if not client.get_collection(collection_name) or not client.is_open():
             raise ValueError("Database is properly initialized or is missing.")
         
         if len(collection) == 0:

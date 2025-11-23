@@ -11,8 +11,15 @@ def load_retriever(k=8):
     input: query string
     output: list of documents with metadata
     """
+    collection_name = "papers"
+    collection = client.get_collection(collection_name)
+
+    if collection is None:
+        raise ValueError(f"Collection '{collection_name}' not found. Please ingest data first.")
+    
     vectordb = Chroma(
         client=client,
+        collection=collection,
         embedding_function=get_embeddings(),
     )
 
