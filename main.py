@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from logics.retriever import load_retriever
 from logics.prompt import create_single_pdf_chain
-from logics.config import DB_DIR 
+from logics.config import client 
 from collections import defaultdict
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
@@ -38,44 +38,44 @@ st.set_page_config(
 
 st.title("Policy Summary")
 
-import shutil
-import os
+#import shutil
+#import os
 
-REPO_DIR = os.path.join(os.getcwd(), "repo_clone") # Path to the cloned repository
+#REPO_DIR = os.path.join(os.getcwd(), "repo_clone") # Path to the cloned repository
 
-# Check if the repo folder exists and delete it
-if os.path.exists(REPO_DIR):
-    shutil.rmtree(REPO_DIR)
-    print(f"Deleted the existing cloned repo at {REPO_DIR}")
-else:
-    print(f"No existing repository found at {REPO_DIR}")
+## Check if the repo folder exists and delete it
+#if os.path.exists(REPO_DIR):
+#    shutil.rmtree(REPO_DIR)
+#    print(f"Deleted the existing cloned repo at {REPO_DIR}")
+#else:
+#    print(f"No existing repository found at {REPO_DIR}")
 
-if os.path.exists(DB_DIR):
-    st.write(f"✅ DB directory exists: {DB_DIR}")
-    st.write("Contents:", os.listdir(DB_DIR))
-else:
-    st.write(f"❌ DB directory NOT found: {DB_DIR}")
+#if os.path.exists(DB_DIR):
+#    st.write(f"✅ DB directory exists: {DB_DIR}")
+#    st.write("Contents:", os.listdir(DB_DIR))
+#else:
+#    st.write(f"❌ DB directory NOT found: {DB_DIR}")
 
 # Load Chroma DB
-vectordb = Chroma(
-    persist_directory="DB_Dir",
-    embedding_function=OpenAIEmbeddings()
-)
+#vectordb = Chroma(
+ #   persist_directory="DB_Dir",
+ #   embedding_function=OpenAIEmbeddings()
+#)
 
 # Access stored metadata
-collection = vectordb._collection
-items = collection.get(include=["metadatas"])
+#collection = vectordb._collection
+#items = collection.get(include=["metadatas"])
 
 # Extract unique PDF names
-pdfs = sorted(set([m.get("source") for m in items["metadatas"]]))
+#pdfs = sorted(set([m.get("source") for m in items["metadatas"]]))
 
-st.write("\nPDFs stored in the Chroma DB:")
-st.write("----------------------------------")
-for p in pdfs:
-    print(p)
+#st.write("\nPDFs stored in the Chroma DB:")
+#st.write("----------------------------------")
+#for p in pdfs:
+#    print(p)
 
-st.write("\nTotal PDFs detected:", len(pdfs))
-st.write("Total chunks stored:", collection.count())
+#st.write("\nTotal PDFs detected:", len(pdfs))
+#st.write("Total chunks stored:", collection.count())
 
 with st.form(key="form"):
     st.subheader("Enter your query here")
@@ -90,7 +90,7 @@ if submit_button:
         st.warning("Please enter a query before submitting.")
         st.stop()
 
-    if not os.path.exists(DB_DIR):
+    if not os.path.exists(client):
         st.error("No papers found. Please ingest papers first.")
         st.stop()
 

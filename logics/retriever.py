@@ -2,7 +2,7 @@ import os
 import subprocess
 from langchain_community.vectorstores import Chroma
 from langchain_core.runnables import RunnableLambda
-from logics.config import DB_DIR, get_embeddings
+from logics.config import client, get_embeddings
 
 
 def load_retriever(k=8):
@@ -12,7 +12,7 @@ def load_retriever(k=8):
     output: list of documents with metadata
     """
     vectordb = Chroma(
-        persist_directory=DB_DIR,
+        client=client,
         embedding_function=get_embeddings(),
     )
 
