@@ -24,5 +24,5 @@ st.title("Methodology")
 st.write("Data sources: Journal articles are loaded on Google Cloud Bucket")
 st.write("Methodology is as follows:")
 image_url = "https://storage.cloud.google.com/research_app_method/Methodology.drawio.png"
-
-st.image(image_url, use_container_width=True)
+image = image.open(image_url)
+st.image(image, use_container_width=True)
