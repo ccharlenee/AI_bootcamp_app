@@ -39,45 +39,6 @@ st.set_page_config(
 
 st.title("Policy Summary")
 
-#import shutil
-#import os
-
-#REPO_DIR = os.path.join(os.getcwd(), "repo_clone") # Path to the cloned repository
-
-## Check if the repo folder exists and delete it
-#if os.path.exists(REPO_DIR):
-#    shutil.rmtree(REPO_DIR)
-#    print(f"Deleted the existing cloned repo at {REPO_DIR}")
-#else:
-#    print(f"No existing repository found at {REPO_DIR}")
-
-#if os.path.exists(DB_DIR):
-#    st.write(f"✅ DB directory exists: {DB_DIR}")
-#    st.write("Contents:", os.listdir(DB_DIR))
-#else:
-#    st.write(f"❌ DB directory NOT found: {DB_DIR}")
-
-# Load Chroma DB
-#vectordb = Chroma(
- #   persist_directory="DB_Dir",
- #   embedding_function=OpenAIEmbeddings()
-#)
-
-# Access stored metadata
-#collection = vectordb._collection
-#items = collection.get(include=["metadatas"])
-
-# Extract unique PDF names
-#pdfs = sorted(set([m.get("source") for m in items["metadatas"]]))
-
-#st.write("\nPDFs stored in the Chroma DB:")
-#st.write("----------------------------------")
-#for p in pdfs:
-#    print(p)
-
-#st.write("\nTotal PDFs detected:", len(pdfs))
-#st.write("Total chunks stored:", collection.count())
-
 if st.button("Ingest PDFs from GCS"):
     vectordb = ingest_pdfs_from_gcs()
     st.success("Journal articles loaded.")
@@ -128,5 +89,15 @@ if submit_button:
             "question": query
         })
         st.write(summary)
+st.title("Disclaimer")
 
+with st.expander ("Click to expand"):
+    st.write("""
+
+        IMPORTANT NOTICE: This web application is developed as a proof-of-concept prototype. The information provided here is NOT intended for actual usage and should not be relied upon for making any decisions, especially those related to financial, legal, or healthcare matters.
+
+        Furthermore, please be aware that the LLM may generate inaccurate or incorrect information. You assume full responsibility for how you use any generated output.
+
+        Always consult with qualified professionals for accurate and personalized advice.
+     """)
 
