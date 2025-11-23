@@ -25,4 +25,4 @@ st.write("Data sources: Journal articles are loaded on Google Cloud Bucket")
 st.write("Methodology is as follows:")
 
 url = "https://storage.googleapis.com/research_app_method/Methodology.drawio.png"
-st.image(url, use_container_width=True)
+st.image(url, width=300)
