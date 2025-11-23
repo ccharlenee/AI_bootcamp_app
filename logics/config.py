@@ -18,7 +18,7 @@ import subprocess
 #    client = PersistentClient(path="/Users/limin/Documents/Python/AI_bootcamp_app/db3")
 #    return client
 
-client = get_chroma_client()
+#client = get_chroma_client()
 
 #PDF_DIR = "/Users/limin/Documents/Python/Journal_database"  # folder containing many PDFs
 
