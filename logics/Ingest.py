@@ -1,6 +1,7 @@
 import os
 import io
 import streamlit as st
+import tempfile
 from google.cloud import storage
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -33,10 +34,16 @@ def ingest_pdfs_from_gcs():
         blob = bucket.blob(pdf_file)
         file_contents = blob.download_as_bytes()
 
-    file_like_object = io.BytesIO(file_contents)
-    loader = PyPDFLoader(file_like_object)
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as temp_file:
+            temp_file.write(file_contents)
+            temp_file_path = temp_file.name
+    
+    loader = PyPDFLoader(temp_file_path)
     docs = loader.load()
     all_docs.extend(docs)
+
+    #remove temp file
+    os.remove(temp_file_path)
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=1000, chunk_overlap=150
