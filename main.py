@@ -93,6 +93,16 @@ if submit_button:
     if not client:
         st.error("No papers found. Please ingest papers first.")
         st.stop()
+    try:
+        # Ensure that a collection is loaded (or check if the client is open)
+        if not client.get_collection() or not client.is_open():
+            raise ValueError("Database is properly initialized or is missing.")
+        
+        if len(collection) == 0:
+            raise ValueError("The database is empty. Please ingest papers before querying.")
+    except Exception as e:
+        st.error(f"Error initializing database: {e}")
+        st.stop()
 
     # Retrieve relevant chunks
     with st.spinner("Retrieving relevant information..."):
