@@ -23,7 +23,6 @@ st.title("Methodology")
 
 st.write("Data sources: Journal articles are loaded on Google Cloud Bucket")
 st.write("Methodology is as follows:")
-st.write("Journal articles are ingested into Chromadatabase using PyPDF and text are split using RecursiveCharacterTextSplitter.")
-st.write("A Chroma vector store of embeddings are generated for efficient retrieval.")
-st.write("The Chroma vector store is converted into a retriever object to be queried.")
-st.write("The prompt and additional context from users uses LLMs to generate a policy related summary for Singapore.")
+image_url = "https://storage.cloud.google.com/research_app_method/Methodology.drawio.png"
+
+st.iamge(image_url, use_column_width=True)
