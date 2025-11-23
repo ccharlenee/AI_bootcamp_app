@@ -33,7 +33,8 @@ def ingest_pdfs_from_gcs():
         blob = bucket.blob(pdf_file)
         file_contents = blob.download_as_bytes()
 
-    loader = PyPDFLoader(io.BytesIO(file_contents))
+    file_like_object = io.BytesIO(file_contents)
+    loader = PyPDFLoader(file_like_object)
     docs = loader.load()
     all_docs.extend(docs)
 
@@ -50,6 +51,4 @@ def ingest_pdfs_from_gcs():
    
     print(f"Vector store saved to {DB_DIR}")
     return vectordb
-#make the script importable as module as well as standalone script
-if __name__ == "__main__":
-    ingest_pdfs()
+
