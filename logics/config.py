@@ -10,13 +10,13 @@ import subprocess
 
 #DB_DIR = os.path.join(clone_dir, "db3")
 
-from chromadb import PersistentClient
+#from chromadb import PersistentClient
 
 #st.cache_resource
-def get_chroma_client():
+#def get_chroma_client():
     # The path should point to the directory in your repo
-    client = PersistentClient(path="/Users/limin/Documents/Python/AI_bootcamp_app/db3")
-    return client
+#    client = PersistentClient(path="/Users/limin/Documents/Python/AI_bootcamp_app/db3")
+#    return client
 
 client = get_chroma_client()
 
