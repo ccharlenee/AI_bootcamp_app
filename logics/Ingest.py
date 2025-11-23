@@ -1,6 +1,7 @@
 import os
 import io
 import streamlit as st
+from google.cloud import storage
 from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
