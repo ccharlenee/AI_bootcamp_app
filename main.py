@@ -2,7 +2,8 @@ import os
 import streamlit as st
 from logics.retriever import load_retriever
 from logics.prompt import create_single_pdf_chain
-from logics.config import client 
+#from logics.config import client 
+from logics.Ingest import ingest_pdfs_from_gcs, DB_DIR
 from collections import defaultdict
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
@@ -77,6 +78,10 @@ st.title("Policy Summary")
 #st.write("\nTotal PDFs detected:", len(pdfs))
 #st.write("Total chunks stored:", collection.count())
 
+if st.button("Ingest PDFs from GCS"):
+    vectordb = ingest_pdfs_from_gcs()
+    st.success("Journal articles loaded.")
+
 with st.form(key="form"):
     st.subheader("Enter your query here")
     user_prompt = st.text_area("Enter your prompt here", height=200)
@@ -90,7 +95,7 @@ if submit_button:
         st.warning("Please enter a query before submitting.")
         st.stop()
 
-    if not client:
+    if not os.path.exists(DB_DIR):
         st.error("No papers found. Please ingest papers first.")
         st.stop()
 

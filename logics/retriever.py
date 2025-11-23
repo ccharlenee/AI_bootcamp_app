@@ -2,7 +2,8 @@ import os
 import subprocess
 from langchain_community.vectorstores import Chroma
 from langchain_core.runnables import RunnableLambda
-from logics.config import client, get_embeddings
+from logics.config import get_embeddings
+from logics.Ingest import DB_DIR
 
 
 def load_retriever(k=8):
@@ -11,16 +12,14 @@ def load_retriever(k=8):
     input: query string
     output: list of documents with metadata
     """
-    collection_name = "papers"
-    collection = client.get_collection(collection_name)
-
-    if collection is None:
-        raise ValueError(f"Collection '{collection_name}' not found. Please ingest data first.")
     
+    if not os.path.exists(DB_DIR):
+        raise ValueError(f"Vector store not found in {DB_DIR}. Please ingest data first.")
+    
+    # Load the Chroma vector store from the temporary directory
     vectordb = Chroma(
-        client=client,
-        collection=collection,
-        embedding_function=get_embeddings(),
+        persist_directory=DB_DIR,
+        embedding_function=get_embeddings(),  
     )
 
     retriever = vectordb.as_retriever(search_kwargs={"k": k})
