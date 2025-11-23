@@ -11,11 +11,8 @@ from langchain_openai import OpenAIEmbeddings
 # Load service account from Streamlit secrets
 service_account_info = st.secrets["gcp_service_account"]
 
-# Replace with your bucket name
-bucket_name = "research_app"
-bucket = client.bucket(bucket_name)
-
 DB_DIR = "/tmp/db3/" 
+bucket_name = "research_app"
 
 def get_embeddings():
     return OpenAIEmbeddings()
@@ -24,6 +21,7 @@ def ingest_pdfs_from_gcs():
     """Load, split, embed, and persist PDFs into Chroma."""
     
     storage_client = storage.Client.from_service_account_info(service_account_info)
+    
     bucket = storage_client.bucket("research_app")
    
     blobs = bucket.list_blobs()  # no prefix as not in subdirectory
