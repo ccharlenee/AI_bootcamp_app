@@ -2,7 +2,7 @@ import os
 import io
 import streamlit as st
 from google.cloud import storage
-from langchain_community.document_loaders import PyPDFDirectoryLoader
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 #from .config import PDF_DIR, DB_DIR, get_embeddings
