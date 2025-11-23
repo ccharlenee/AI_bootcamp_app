@@ -15,7 +15,7 @@ from chromadb import PersistentClient
 #st.cache_resource
 def get_chroma_client():
     # The path should point to the directory in your repo
-    client = PersistentClient(path="./db3")
+    client = PersistentClient(path="https://github.com/ccharlenee/AI_bootcamp_app.git/db3")
     return client
 
 client = get_chroma_client()
